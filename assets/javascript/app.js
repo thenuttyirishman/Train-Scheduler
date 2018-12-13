@@ -1,10 +1,11 @@
+
 var config = {
-  apiKey: "AIzaSyCcR-lMuoCLd4uQO0HD0fdPeXt_i76Arhw",
-  authDomain: "train-scheduler-65893.firebaseapp.com",
-  databaseURL: "https://train-scheduler-65893.firebaseio.com",
-  projectId: "train-scheduler-65893",
-  storageBucket: "train-scheduler-65893.appspot.com",
-  messagingSenderId: "879577518161"
+  apiKey: "AIzaSyAaJuHoUiw7UmGIuwsLvYsitSyODn8ayJU",
+  authDomain: "train-scheduler-8cd73.firebaseapp.com",
+  databaseURL: "https://train-scheduler-8cd73.firebaseio.com",
+  projectId: "train-scheduler-8cd73",
+  storageBucket: "train-scheduler-8cd73.appspot.com",
+  messagingSenderId: "880865646525"
 };
 
 firebase.initializeApp(config);
@@ -12,7 +13,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 // 2. Button for adding Trains
-$("#add-train-btn").on("click", function(event) {
+$("#add-train-btn").on("click", function (event) {
   console.log("Hi");
   event.preventDefault();
   event.stopPropagation();
@@ -20,7 +21,7 @@ $("#add-train-btn").on("click", function(event) {
   // Grabs user input
   var trainName = $("#train-name-input").val().trim();
   var destination = $("#destination-input").val().trim();
-  var time = moment($("#time-input").val().trim(), "0000").format("X");
+  var time = $("#time-input").val().trim();
   var length = $("#frequency-input").val().trim();
   var newTrain = {
     name: trainName,
@@ -41,27 +42,17 @@ $("#add-train-btn").on("click", function(event) {
   return false;
 });
 
-
-
 database.ref().on("child_added", function (childSnapshot) {
   console.log(childSnapshot.val());
-
   // Store everything into a variable.
   var trainName = childSnapshot.val().name;
   var destination = childSnapshot.val().place;
   var time = childSnapshot.val().time;
   var length = childSnapshot.val().length;
-
-  // Create the new row
-  var newRow = $("<tr>").append(
-    $("<td>").text(trainName),
-    $("<td>").text(destination),
-    $("<td>").text(time),
-    $("<td>").text(length),
-  );
-
+  debugger
   // Append the new row to the table
-  $("#train-table > tbody").append(newRow);
+  $("tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td></tr>" + time + "</td></tr>" + length);
+
 });
 
 
