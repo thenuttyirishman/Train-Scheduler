@@ -49,7 +49,7 @@ database.ref().on("child_added", function (childSnapshot) {
   var destination = childSnapshot.val().place;
   var time = childSnapshot.val().time;
   var length = childSnapshot.val().length;
-  debugger
+  
   // Append the new row to the table
   $("tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td></tr>" + time + "</td></tr>" + length);
 
